@@ -1,0 +1,87 @@
+﻿<Window x:Class="GUI_MS2.ChatRoom_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:w="clr-namespace:System.Windows.Workarounds"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI_MS2"
+        mc:Ignorable="d"
+        Title="ChatRoom_Window" Icon="./Pics/Logo/live-chat.ico" Height="450" Width="800" Background="#FF9CD7A7" ResizeMode="NoResize" Foreground="Black">
+
+    <!--Main Grid-->
+    <Grid RenderTransformOrigin="0.422,0.434">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="143*"/>
+            <RowDefinition Height="67*"/>
+        </Grid.RowDefinitions>
+        <!--Text Handle-->
+        <TextBlock  FontSize="13" HorizontalAlignment="Left" FontFamily="Tw Cen MT Condensed" Height="17" Margin="159,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"><Run FontWeight="Bold" Text="User" TextDecorations="Underline"/></TextBlock>
+        <TextBlock FontSize="13" HorizontalAlignment="Left" FontFamily="Tw Cen MT Condensed" Height="17" Margin="25,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"><Run FontWeight="Bold" Text="Status" TextDecorations="Underline"/></TextBlock>
+        <Border BorderBrush="#FF2C8DE1" BorderThickness="1" CornerRadius="5" Margin="156,17,502.286,243.429">
+            <TextBox Text="{Binding UserOnline}" BorderThickness="0" FontSize="15" FontFamily="Tw Cen MT Condensed" IsReadOnly="True" Background="Transparent" HorizontalAlignment="Left" Margin="0.857,-2.143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="27" Width="130" TextChanged="User_TextChanged"/>
+        </Border>
+        <Border BorderBrush="#FF2C8DE1" BorderThickness="1" CornerRadius="5" Margin="24,16,649.286,242.429" RenderTransformOrigin="0.5,0.5">
+            <TextBox Text="Online" FontSize="15"  BorderThickness="0" FontFamily="Tw Cen MT Condensed" IsReadOnly="True" Background="Transparent" HorizontalAlignment="Left" Margin="1.857,0.857,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="25" Width="115" TextChanged="Status_TextChanged"/>
+        </Border>
+        <Border BorderBrush="#FF2C8DE1" BorderThickness="2" CornerRadius="5" Margin="24,33.571,235.286,21.714" Grid.Row="1">
+            <TextBox Name="NewMessageTextBox" MaxLength="100" BorderThickness="0" KeyDown="TextBox_KeyDown"  Text="{Binding NewMessage}"  FontSize="20" FontFamily="Tw Cen MT Condensed" HorizontalAlignment="Left" Height="73" Margin="0.714,0.714,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="529" TextChanged="EnterMessage_TextChanged" Grid.Row="1" GotFocus="Enter_Message_GotFocus" LostFocus="Enter_Message_LostFocus"/>
+        </Border>
+        <!--Buttons-->
+        <Button Name="editButton" BorderBrush="Transparent" Margin="628,37.571,111.286,42.714" Grid.Row="1" Visibility="{Binding IsEditable}" RenderTransformOrigin="0.501,0.5" Click="editButtonClick">
+            <Button.Background>
+                <ImageBrush ImageSource ="./Pics/Backgrounds\edit2.png"/>
+            </Button.Background>
+        </Button>
+        <Button  BorderBrush="Transparent" Foreground="White" FontFamily="Tw Cen MT Condensed" HorizontalAlignment="Left" Margin="746,4,0,0" VerticalAlignment="Top" Width="23" Height="25" Click="Button_Click_Logout">
+            <Button.Background>
+                <ImageBrush ImageSource ="./Pics/Backgrounds\logout.png"/>
+            </Button.Background>
+        </Button>
+        <Button Name="send" BorderThickness="0"  Margin="567,37.571,172.286,42.714" Click="Send_Click" Grid.Row="1">
+            <Button.Background>
+                <ImageBrush ImageSource="./Pics/Backgrounds/sendicon.png"/>
+            </Button.Background>
+        </Button>
+        <!--Labels-->
+        <Label Content="Send" Foreground="#FF2C8DE1" FontFamily="Tw Cen MT Condensed" FontSize="13" Margin="580,86.571,123.286,17.714" Grid.Row="1" />
+        <Label Content="Logout" Foreground="#FF2C8DE1" FontFamily="Tw Cen MT Condensed" FontSize="13" Margin="738,26,-2.714,232.429" />
+        <Label Content="Edit" Foreground="#FF2C8DE1" FontFamily="Tw Cen MT Condensed" FontSize="13" Margin="641,86.571,62.286,17.714" Grid.Row="1" Background="#00000000" Visibility="{Binding IsEditable}"/>
+        <!--Filter and Sort-->
+        <Border BorderBrush="#FF2C8DE1" BorderThickness="3" CornerRadius="5" Margin="637,50,17,106" Grid.RowSpan="2">
+            <Grid Margin="1.857,1.857,1.429,1.143" Grid.RowSpan="2" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="227*"/>
+                    <RowDefinition Height="14*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <TextBlock FontSize="13" HorizontalAlignment="Left" FontFamily="Tw Cen MT Condensed" TextWrapping="Wrap" Text="Group Id" VerticalAlignment="Top" FontWeight="Bold" TextDecorations="Underline" RenderTransformOrigin="0.44,0.688" Margin="8,20,0,0"/>
+                <TextBlock FontSize="13" HorizontalAlignment="Left" FontFamily="Tw Cen MT Condensed" TextWrapping="Wrap" Text="Group Id and nickname" VerticalAlignment="Top" TextDecorations="Underline" FontWeight="Bold" Margin="8,62,0,0"/>
+                <TextBlock FontSize="13" HorizontalAlignment="Left" Foreground="#FF2C8DE1" FontFamily="Tw Cen MT Condensed" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" RenderTransformOrigin="0.022,0.812" Margin="47,4,0,0" Text="Filter By"/>
+                <TextBlock FontSize="13" HorizontalAlignment="Left" Foreground="#FF2C8DE1" FontFamily="Tw Cen MT Condensed" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" RenderTransformOrigin="0.022,0.812" Margin="50,114,0,0" Text="Sort By "/>
+
+                <ComboBox  Name="filter_g_id" ItemsSource="{Binding Group_id_select}" SelectedValue="{Binding Group_id_filter }"  HorizontalAlignment="Left" Margin="8,40,0,0" VerticalAlignment="Top" Width="110" SelectionChanged="group_id_SelectionChanged">
+
+                </ComboBox>
+
+                <ComboBox Name="filter_gid_nickname" ItemsSource="{Binding Group_id_and_nickname_Select}"   SelectedValue="{Binding Group_id_and_nickname_filter }" HorizontalAlignment="Left" Margin="8,80,0,0" VerticalAlignment="Top" Width="112" SelectionChanged="group_id_and_nickname_SelectionChanged"/>
+                <ComboBox   Name="sort_combo_box" SelectedValue="{Binding  Sort_by}"  HorizontalAlignment="Left" Margin="9,133,0,0" VerticalAlignment="Top" Width="112" SelectionChanged="Sort_by">
+                    <ComboBoxItem Name="sort_TimeStamp"  IsEnabled="True" Content="Message timestamp" Selected="sort_TimeStamp_Selected"/>
+                    <ComboBoxItem Name="sort_nickName" Content="Nickname" Selected="sort_nickName_Selected"/>
+                    <ComboBoxItem Name="sort_allVals" Content="g_id, nickname, and timestamp"/>
+                </ComboBox>
+
+                <Button Content="Sort and Filter" Foreground="White" FontFamily="Tw Cen MT Condensed" Background="#ff0066cc" HorizontalAlignment="Left" Margin="24,198,0,0" VerticalAlignment="Top" Width="73" Height="28" FontSize="15" Click="Button_Click_Sort_Filter" RenderTransformOrigin="0.466,0.278"/>
+
+                <RadioButton IsChecked="{Binding Ascending}"   Name="ascending"  FontSize="13" Content="ascending" FontFamily="Tw Cen MT Condensed" HorizontalAlignment="Left" Margin="12,160,0,0" VerticalAlignment="Top" Checked="RadioButton_ascending"/>
+                <RadioButton  IsChecked="{Binding Descending}" Name="descending" FontSize="13" Content="descending" FontFamily="Tw Cen MT Condensed" HorizontalAlignment="Left" Margin="12,179,0,0" VerticalAlignment="Top" Checked="RadioButton_descending"/>
+
+            </Grid>
+        </Border>
+
+        <!--Messeges-->
+        <Border BorderBrush="#FF2C8DE1" BorderThickness="3" CornerRadius="5" Margin="25,48,182.286,105.714" Grid.Row="0" Grid.RowSpan="2">
+            <ListBox  Name ="MessagesListBox" BorderThickness="0" ItemsSource="{Binding Messages}" ScrollViewer.CanContentScroll="True" w:ListBox.AutoScroll="True" IsEnabled="True" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Stretch" Width="578" Margin="0,0,0.857,-1" Grid.RowSpan="2" SelectionChanged="Messages_SelectionChanged" />
+        </Border>
+    </Grid>
+
+</Window>
